@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class CrearProcesoSumarFixed {
     private final String ficheroResultado;
-    private Process p;
+    private final Process process;
 
     // Constructor
     public CrearProcesoSumarFixed(int numInicial, int numFinal,
-                             String ficheroResultado) throws IOException {
+                                  String ficheroResultado) throws IOException {
 
         this.ficheroResultado = ficheroResultado;
 
@@ -25,7 +25,7 @@ public class CrearProcesoSumarFixed {
         pb.redirectError(ProcessBuilder.Redirect.INHERIT);
 
         // Iniciar el proceso
-        p = pb.start();
+        process = pb.start();
     }
 
     // Configurar el proceso que ejecutará la clase Sumar
@@ -53,7 +53,7 @@ public class CrearProcesoSumarFixed {
     // Esperar a que termine el proceso hijo
     public void esperarFinalizacion() throws InterruptedException {
 
-        int codigoSalida = p.waitFor();
+        int codigoSalida = process.waitFor();
 
         if (codigoSalida != 0) {
             throw new IllegalStateException(
